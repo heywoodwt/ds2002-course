@@ -8,7 +8,7 @@ The goal of this activity is to familiarize you with the fundamental commands us
 
 ## In-class exercises
 
-> **Note:** Go to your ***forked course repository*** and start Codespaces as described in the [course's general setup instructions](../../setup/README.md). If you haven't forked the repo yet, do it now. 
+Go to your ***forked course repository*** and start a Codespaces. If you haven't forked the repo yet, do it now and start the prebuild of your Codespace as described in [Lab 00: Setup](../labs/00-env/README.md); while you're waiting for the build process to complete start a codespace from the *course repo* instead so you can start with exercises. 
 
 > **Advanced: Optional** - If you set up software tools on your own computer, for an additional challenge, complete these exercises on your local laptop using either the MacOS Terminal (Mac) or Git Bash (Windows). You may need to modify some commands accordingly. Please be aware that these commands will not work in Windows PowerShell as is.
 
@@ -1418,6 +1418,53 @@ If you can become `root` or use the `sudo` command, there is also a system-wide 
 
 This makes the variable available to all users on the system.
 
+### File Permissions
+
+1. Touch a file named `permission_test` and echo some content into it. 
+
+2. Use `ls -al` to see it listed in your directory.
+
+3. Now change its permissions to `000` like this:
+
+```
+chmod 000 permission_test
+```
+
+Try to `cat` the contents of the file. You should get a permission denied message.
+
+4. Now change its permissions so that only you can read and write the file:
+
+```
+chmod 600 permission_test
+```
+
+Use `ls -al` again to see the permission bits for the file.
+
+5. Finally, let's grant other members of your group read access, along with the access
+we already gave you:
+
+```
+chmod 640 permission_test
+```
+
+List the directory contents once more with `ls -al` and notice the permission bits for the file.
+
+Notice the full set of characters in the far left column:
+
+```
+-rw-r-----   1 nmagee  staff     0B Jan 16 09:27 permission_test
+```
+
+The first character represents what type of object it is, i.e. file (`-`), directory (`d`), link (`s`), etc.
+
+The next 9 characters represent permissions for the USER (i.e. the owner), GROUP, and OTHER machine users.
+
+Each of those entities can have any combination of `rwx` permissions, which stands for READ, WRITE, and EXECUTE. This applies both to files and directories.
+
+So to see `rwxrwxrwx` means the user, group, and other users all have full permissions to read, write, and execute the file/folder. <a href="https://www.redhat.com/en/blog/linux-file-permissions-explained" target="_blank" rel="noopener noreferrer"><strong>Read more here</strong></a> about POSIX permissions.
+
+As practice, you should now determine what command is required to allow the USER and GROUP read/write permissions to a file, but no access to OTHER users.
+
 ## Advanced Concepts (Optional)
 
 If you like to dive a bit deeper, explore the following commands. **The content in the Advanced section is not part of any quizzes.**
@@ -2048,53 +2095,6 @@ Your output may look like this:
 - `-h` - Human-readable format
 - `.` - Current directory
 - Shows total size of all files in the current directory and subdirectories
-
-### File Permissions
-
-1. Touch a file named `permission_test` and echo some content into it. 
-
-2. Use `ls -al` to see it listed in your directory.
-
-3. Now change its permissions to `000` like this:
-
-```
-chmod 000 permission_test
-```
-
-Try to `cat` the contents of the file. You should get a permission denied message.
-
-4. Now change its permissions so that only you can read and write the file:
-
-```
-chmod 600 permission_test
-```
-
-Use `ls -al` again to see the permission bits for the file.
-
-5. Finally, let's grant other members of your group read access, along with the access
-we already gave you:
-
-```
-chmod 640 permission_test
-```
-
-List the directory contents once more with `ls -al` and notice the permission bits for the file.
-
-Notice the full set of characters in the far left column:
-
-```
--rw-r-----   1 nmagee  staff     0B Jan 16 09:27 permission_test
-```
-
-The first character represents what type of object it is, i.e. file (`-`), directory (`d`), link (`s`), etc.
-
-The next 9 characters represent permissions for the USER (i.e. the owner), GROUP, and OTHER machine users.
-
-Each of those entities can have any combination of `rwx` permissions, which stands for READ, WRITE, and EXECUTE. This applies both to files and directories.
-
-So to see `rwxrwxrwx` means the user, group, and other users all have full permissions to read, write, and execute the file/folder. <a href="https://www.redhat.com/en/blog/linux-file-permissions-explained" target="_blank" rel="noopener noreferrer"><strong>Read more here</strong></a> about POSIX permissions.
-
-As practice, you should now determine what command is required to allow the USER and GROUP read/write permissions to a file, but no access to OTHER users.
 
 ### File Permissions and Ownership
 
